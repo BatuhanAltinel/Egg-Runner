@@ -10,7 +10,7 @@ public class Fox : MonoBehaviour
     public GameObject farmer;
     public GameObject egg;
 
-    float timer = 4;
+    float timer = 3;
     
 
     private void Update()
@@ -44,7 +44,7 @@ public class Fox : MonoBehaviour
 
         if (CalculateDistance() > 15)
         {
-            timer = 4;
+            timer = 3;
         }
     }
 }
