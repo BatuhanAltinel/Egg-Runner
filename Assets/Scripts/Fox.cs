@@ -6,45 +6,59 @@ public class Fox : MonoBehaviour
 {
     [SerializeField]private float m_moveSpeed = 0.3f;
 
-    float distance;
     public GameObject farmer;
     public GameObject egg;
-
-    float timer = 3;
     
 
     private void Update()
     {
         MoveForward();
-        SpawnEgg();
     }
+
+    private void OnTriggerEnter(Collider other)
+    {
+        if(other.gameObject.CompareTag("Wood"))
+        {
+            Debug.Log("wood triggered");
+            SpawnEgg();
+        }
+    }
+
 
     void MoveForward()
     {
-        transform.Translate(Vector3.forward * m_moveSpeed);
+        if(checkMoveDistance())
+        {
+            transform.Translate(Vector3.forward * m_moveSpeed);
+            //will add moving animation..
+        }
+            
     }
 
     float CalculateDistance()
     {
-       return distance = Vector3.Distance(this.transform.position, farmer.transform.position);
+        float distance = Vector3.Distance(this.transform.position, farmer.transform.position);
+        return distance;
     }
 
     void SpawnEgg()
     {
-        
-        if (CalculateDistance() < 15)
-        {
-            timer += Time.deltaTime;
-            if (timer > 3)
-            {
-                Instantiate(egg, transform.position, Quaternion.identity);
-                timer = 0;
-            }
-        }
-
-        if (CalculateDistance() > 15)
-        {
-            timer = 3;
-        }
+        Instantiate(egg, transform.position, Quaternion.identity);
     }
+
+    bool checkMoveDistance()
+    {
+        if (CalculateDistance() > 25)
+        {
+            return false;
+        }
+        return true;
+    }
+
+    void RandomHorizontalMove()
+    {
+
+    }
+
+
 }

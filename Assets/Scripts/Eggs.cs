@@ -4,49 +4,35 @@ using UnityEngine;
 
 public class Eggs : MonoBehaviour
 {
-    [SerializeField] private float followSpeed = 12f;
 
-
-    public void UpdateEggPosition(Transform folowedEgg, bool isFollowStart)
+    public void Move(Transform destination,float timeToMove ,bool isFollowing)
     {
-        StartCoroutine(StartFollowingToLastEggPosition(folowedEgg, isFollowStart));
+        StartCoroutine(MoveRoutine(destination,timeToMove, isFollowing));
     }
 
-    IEnumerator StartFollowingToLastEggPosition(Transform folowedEgg, bool isFollowStart)
+    IEnumerator MoveRoutine(Transform destination,float timeToMove, bool isFollowing)
     {
+        Transform startPosition = this.transform;
+        float elapsedTime = 0f;
 
-        while (isFollowStart)
+        while (isFollowing)
         {
             yield return new WaitForEndOfFrame();
-            transform.position = new Vector3(Mathf.Lerp(transform.position.x, folowedEgg.position.x, followSpeed * Time.deltaTime),
-                transform.position.y,
-                Mathf.Lerp(transform.position.z, folowedEgg.position.z, followSpeed * Time.deltaTime));
+            if (Vector3.Distance(startPosition.position,destination.position) < 0.01f)
+            {
+                startPosition = destination;
+            }
+
+            elapsedTime += Time.deltaTime;
+
+            float t = Mathf.Clamp(elapsedTime / timeToMove, 0, 1);
+
+            transform.position = Vector3.Lerp(startPosition.position, destination.position, t);
+
         }
     }
-
-    //public void Move(Transform destination,bool isFollowing)
-    //{
-    //    StartCoroutine(MoveRoutine(destination, isFollowing));
-    //}
-
-    //IEnumerator MoveRoutine(Transform destination , bool isFollowing)
-    //{
-    //    //Transform startPosition = this.transform;
-    //    //float elapsedTime = 0f;
-
-    //    //while (isFollowing)
-    //    //{
-
-    //    //    elapsedTime += Time.deltaTime;
-
-    //    //    float t = Mathf.Clamp(elapsedTime / timeToMove, 0, 1);
-
-    //    //    transform.position = Vector3.Lerp(startPosition.position, destination.position, t);
-
-    //    //    yield return null;
-
-    //    //}
 }
-    
+
+
 
 
