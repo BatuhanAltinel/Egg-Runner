@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Fox : MonoBehaviour
+public class Thief : MonoBehaviour
 {
     [SerializeField]private float m_moveSpeed = 0.3f;
 
@@ -10,6 +10,7 @@ public class Fox : MonoBehaviour
     public GameObject egg;
 
     bool canMoveHorizontal = false;
+    bool doubleHit = false;
     
 
     private void Update()
@@ -23,7 +24,10 @@ public class Fox : MonoBehaviour
         {
             Debug.Log("wood triggered");
             canMoveHorizontal = true;
-            RandomMoveHorizontalMove(canMoveHorizontal);
+
+            if(!doubleHit)
+                RandomMoveHorizontalMove(canMoveHorizontal);
+
             SpawnEgg();
         }
     }
@@ -72,12 +76,13 @@ public class Fox : MonoBehaviour
         while(canMove)
         {
             yield return null;
-
+            doubleHit = true;
             transform.position = Vector3.Lerp(this.transform.position,destination, Time.deltaTime*m_moveSpeed*10);
-
+            
             if(Mathf.Abs(transform.position.x - destination.x) < 1f)
             {
                 canMove = false;
+                doubleHit = false;
             }
         }
     }
