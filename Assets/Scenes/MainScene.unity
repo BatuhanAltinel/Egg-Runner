@@ -147,7 +147,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 192381747}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: -1, z: 0}
+  m_LocalPosition: {x: 0, y: -1, z: -12}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 987136727}
@@ -436,12 +436,6 @@ GameObject:
     type: 3}
   m_PrefabInstance: {fileID: 2023909063269560190}
   m_PrefabAsset: {fileID: 0}
---- !u!1 &1429439734 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 2001307158969437615, guid: ade2abc9486636743b72fbcbdc7535f8,
-    type: 3}
-  m_PrefabInstance: {fileID: 2023909063269560190}
-  m_PrefabAsset: {fileID: 0}
 --- !u!1 &1842640059
 GameObject:
   m_ObjectHideFlags: 0
@@ -560,75 +554,6 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
-    - target: {fileID: 569563524, guid: ade2abc9486636743b72fbcbdc7535f8, type: 3}
-      propertyPath: m_LocalRotation.w
-      value: -0.094864935
-      objectReference: {fileID: 0}
-    - target: {fileID: 569563524, guid: ade2abc9486636743b72fbcbdc7535f8, type: 3}
-      propertyPath: m_LocalRotation.x
-      value: 0.19637483
-      objectReference: {fileID: 0}
-    - target: {fileID: 569563524, guid: ade2abc9486636743b72fbcbdc7535f8, type: 3}
-      propertyPath: m_LocalRotation.y
-      value: -0.29768422
-      objectReference: {fileID: 0}
-    - target: {fileID: 569563524, guid: ade2abc9486636743b72fbcbdc7535f8, type: 3}
-      propertyPath: m_LocalRotation.z
-      value: -0.9294201
-      objectReference: {fileID: 0}
-    - target: {fileID: 569563524, guid: ade2abc9486636743b72fbcbdc7535f8, type: 3}
-      propertyPath: m_LocalEulerAnglesHint.x
-      value: -36.2
-      objectReference: {fileID: 0}
-    - target: {fileID: 1962152535, guid: ade2abc9486636743b72fbcbdc7535f8, type: 3}
-      propertyPath: m_TagString
-      value: Wood
-      objectReference: {fileID: 0}
-    - target: {fileID: 1962152536, guid: ade2abc9486636743b72fbcbdc7535f8, type: 3}
-      propertyPath: m_LocalScale.y
-      value: 9.22
-      objectReference: {fileID: 0}
-    - target: {fileID: 1962152536, guid: ade2abc9486636743b72fbcbdc7535f8, type: 3}
-      propertyPath: m_LocalPosition.x
-      value: -3.42
-      objectReference: {fileID: 0}
-    - target: {fileID: 1962152536, guid: ade2abc9486636743b72fbcbdc7535f8, type: 3}
-      propertyPath: m_LocalPosition.y
-      value: -2.54
-      objectReference: {fileID: 0}
-    - target: {fileID: 1962152536, guid: ade2abc9486636743b72fbcbdc7535f8, type: 3}
-      propertyPath: m_LocalPosition.z
-      value: 1.71
-      objectReference: {fileID: 0}
-    - target: {fileID: 1962152537, guid: ade2abc9486636743b72fbcbdc7535f8, type: 3}
-      propertyPath: m_IsTrigger
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 236244085014198216, guid: ade2abc9486636743b72fbcbdc7535f8,
-        type: 3}
-      propertyPath: m_LocalRotation.w
-      value: 0.6858183
-      objectReference: {fileID: 0}
-    - target: {fileID: 236244085014198216, guid: ade2abc9486636743b72fbcbdc7535f8,
-        type: 3}
-      propertyPath: m_LocalRotation.x
-      value: -0.72777283
-      objectReference: {fileID: 0}
-    - target: {fileID: 236244085014198216, guid: ade2abc9486636743b72fbcbdc7535f8,
-        type: 3}
-      propertyPath: m_LocalRotation.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 236244085014198216, guid: ade2abc9486636743b72fbcbdc7535f8,
-        type: 3}
-      propertyPath: m_LocalRotation.z
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 236244085014198216, guid: ade2abc9486636743b72fbcbdc7535f8,
-        type: 3}
-      propertyPath: m_LocalEulerAnglesHint.x
-      value: -93.4
-      objectReference: {fileID: 0}
     - target: {fileID: 7429498959340374672, guid: ade2abc9486636743b72fbcbdc7535f8,
         type: 3}
       propertyPath: m_RootOrder
@@ -689,11 +614,6 @@ PrefabInstance:
       propertyPath: m_Name
       value: farmer
       objectReference: {fileID: 0}
-    - target: {fileID: 8403642496572176757, guid: ade2abc9486636743b72fbcbdc7535f8,
-        type: 3}
-      propertyPath: wood
-      value: 
-      objectReference: {fileID: 1429439734}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: ade2abc9486636743b72fbcbdc7535f8, type: 3}
 --- !u!1001 &2953070905165860304

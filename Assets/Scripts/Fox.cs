@@ -8,6 +8,8 @@ public class Fox : MonoBehaviour
 
     public GameObject farmer;
     public GameObject egg;
+
+    bool canMoveHorizontal = false;
     
 
     private void Update()
@@ -20,6 +22,8 @@ public class Fox : MonoBehaviour
         if(other.gameObject.CompareTag("Wood"))
         {
             Debug.Log("wood triggered");
+            canMoveHorizontal = true;
+            RandomMoveHorizontalMove(canMoveHorizontal);
             SpawnEgg();
         }
     }
@@ -55,10 +59,27 @@ public class Fox : MonoBehaviour
         return true;
     }
 
-    void RandomHorizontalMove()
+    void RandomMoveHorizontalMove(bool canMove)
     {
-
+        StartCoroutine(MoveHorizontalRoutine(canMove));
     }
 
+    IEnumerator MoveHorizontalRoutine(bool canMove)
+    {
+        float randomNum = Random.Range(-13f,13f);
+        Vector3 destination = new Vector3(randomNum,transform.position.y,transform.position.z);
+        Debug.Log(randomNum);
+        while(canMove)
+        {
+            yield return null;
+
+            transform.position = Vector3.Lerp(this.transform.position,destination, Time.deltaTime*m_moveSpeed*10);
+
+            if(Mathf.Abs(transform.position.x - destination.x) < 1f)
+            {
+                canMove = false;
+            }
+        }
+    }
 
 }
