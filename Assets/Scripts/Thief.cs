@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Thief : MonoBehaviour
+public class Fox : MonoBehaviour
 {
     [SerializeField]private float m_moveSpeed = 0.3f;
 

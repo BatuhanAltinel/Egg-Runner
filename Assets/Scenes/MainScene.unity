@@ -544,7 +544,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6de6765e91adc924e9ce6cdc6a9e5ca3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_moveSpeed: 0.2
+  m_moveSpeed: 0.35
   farmer: {fileID: 1336826352}
   egg: {fileID: 6914115792961607874, guid: 8c09406af4fb73c4cb4e3a22f8bb62e1, type: 3}
 --- !u!1001 &2023909063269560190
