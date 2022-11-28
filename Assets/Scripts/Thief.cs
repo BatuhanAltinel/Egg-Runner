@@ -24,7 +24,7 @@ public class Thief : MonoBehaviour
         {
             Debug.Log("wood triggered");
             canMoveHorizontal = true;
-
+            
             if(!doubleHit)
                 RandomMoveHorizontalMove(canMoveHorizontal);
 
