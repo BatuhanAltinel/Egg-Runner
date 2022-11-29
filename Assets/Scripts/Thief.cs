@@ -5,14 +5,17 @@ using UnityEngine;
 public class Thief : MonoBehaviour
 {
     [SerializeField]private float m_moveSpeed = 0.3f;
-
+    Animator anim;
     public GameObject farmer;
     public GameObject egg;
 
     bool canMoveHorizontal = false;
     bool doubleHit = false;
     
-
+    void Awake()
+    {
+        anim = GetComponentInChildren<Animator>();
+    }
     private void Update()
     {
         MoveForward();
@@ -37,7 +40,14 @@ public class Thief : MonoBehaviour
     {
         if(checkMoveDistance())
         {
-            transform.Translate(Vector3.forward * m_moveSpeed);
+            if(anim != null)
+            {
+                anim.SetBool("CanRun",true);
+                transform.Translate(Vector3.forward * m_moveSpeed);
+            }
+            else
+                Debug.LogWarning("Animator has not been found");
+            
             //will add moving animation..
         }
             
@@ -52,12 +62,15 @@ public class Thief : MonoBehaviour
     void SpawnEgg()
     {
         Instantiate(egg, transform.position, Quaternion.identity);
+        anim.SetBool("isHit",true);
+        StartCoroutine(StopJumpingRoutine());
     }
 
     bool checkMoveDistance()
     {
         if (CalculateDistance() > 25)
         {
+            anim.SetBool("CanRun",false);
             return false;
         }
         return true;
@@ -85,6 +98,12 @@ public class Thief : MonoBehaviour
                 doubleHit = false;
             }
         }
+    }
+
+    IEnumerator StopJumpingRoutine()
+    {
+        yield return new WaitForSeconds(0.3f);
+        anim.SetBool("isHit",false);
     }
 
 }

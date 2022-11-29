@@ -7,7 +7,7 @@ public class EggStack : MonoBehaviour
 
     public Transform[] stackPoints = new Transform[15];
 
-    List<GameObject> _eggList = new List<GameObject>();
+    // List<GameObject> _eggList = new List<GameObject>();
 
     private int _eggListIndexCounter = 0;
 
@@ -16,7 +16,7 @@ public class EggStack : MonoBehaviour
       
         if (other.CompareTag("Egg"))
         {
-            _eggList.Add(other.gameObject);
+            // _eggList.Add(other.gameObject);
 
             other.gameObject.GetComponent<Eggs>().Move(stackPoints[_eggListIndexCounter], 1f, true);
             _eggListIndexCounter++;
