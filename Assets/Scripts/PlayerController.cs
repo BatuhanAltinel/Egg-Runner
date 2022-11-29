@@ -4,7 +4,6 @@ using UnityEngine;
 
 public class PlayerController : MonoBehaviour
 {
-    public static PlayerController playerController;
     public float moveSpeed;
     public float xSpeed;
 
@@ -18,8 +17,7 @@ public class PlayerController : MonoBehaviour
     private void Awake()
     {
         anim = GetComponent<Animator>();
-        if(playerController == null)
-            playerController = this;
+        
     }
     // Update is called once per frame
     void Update()
