@@ -4,17 +4,19 @@ using UnityEngine;
 
 public class Thief : MonoBehaviour
 {
-    [SerializeField]private float m_moveSpeed = 0.3f;
+    [SerializeField]private float m_moveSpeed = 0.35f;
+    [SerializeField]private float rbMoveSpeed = 220f;
     Animator anim;
+    Rigidbody rb;
     public GameObject farmer;
     public GameObject egg;
 
-    bool canMoveHorizontal = false;
-    bool doubleHit = false;
+    bool canMoveHorizontal = true;
     
     void Awake()
     {
         anim = GetComponentInChildren<Animator>();
+        rb = GetComponent<Rigidbody>();
     }
     private void Update()
     {
@@ -26,11 +28,7 @@ public class Thief : MonoBehaviour
         if(other.gameObject.CompareTag("Wood"))
         {
             Debug.Log("wood triggered");
-            canMoveHorizontal = true;
-            
-            if(!doubleHit)
-                RandomMoveHorizontalMove(canMoveHorizontal);
-
+            RandomMoveHorizontalMove();
             SpawnEgg();
         }
     }
@@ -44,6 +42,7 @@ public class Thief : MonoBehaviour
             {
                 anim.SetBool("CanRun",true);
                 transform.Translate(Vector3.forward * m_moveSpeed);
+                // rb.velocity = new Vector3(0,0,rbMoveSpeed*Time.deltaTime);
             }
             else
                 Debug.LogWarning("Animator has not been found");
@@ -53,22 +52,18 @@ public class Thief : MonoBehaviour
             
     }
 
-    float CalculateDistance()
-    {
-        float distance = Vector3.Distance(this.transform.position, farmer.transform.position);
-        return distance;
-    }
-
     void SpawnEgg()
     {
         Instantiate(egg, transform.position, Quaternion.identity);
         anim.SetBool("isHit",true);
+        IncreaseMoveSpeedWhenHitting();
+        DecreaseMoveSpeed();
         StartCoroutine(StopJumpingRoutine());
     }
 
     bool checkMoveDistance()
     {
-        if (CalculateDistance() > 25)
+        if (GameManager.gameManager.GetDistance() > 35)
         {
             anim.SetBool("CanRun",false);
             return false;
@@ -76,27 +71,38 @@ public class Thief : MonoBehaviour
         return true;
     }
 
-    void RandomMoveHorizontalMove(bool canMove)
+    void RandomMoveHorizontalMove()
     {
-        StartCoroutine(MoveHorizontalRoutine(canMove));
+        StartCoroutine(MoveHorizontalRoutine());
     }
 
-    IEnumerator MoveHorizontalRoutine(bool canMove)
+    IEnumerator MoveHorizontalRoutine()
     {
-        float randomNum = Random.Range(-13f,13f);
-        Vector3 destination = new Vector3(randomNum,transform.position.y,transform.position.z);
+        float randomNum = Random.Range(-10f,10f);
+        float elapsedTime = 0;
+        bool canMove = true;
         Debug.Log(randomNum);
+
+        yield return new WaitForSeconds(1.2f);
+
+        Transform startPosition = this.transform;
+
         while(canMove)
         {
-            yield return null;
-            doubleHit = true;
-            transform.position = Vector3.Lerp(this.transform.position,destination, Time.deltaTime*m_moveSpeed*10);
+            elapsedTime += Time.deltaTime;
+
+            float t = Mathf.Clamp(elapsedTime / 10f, 0, 1);
+            Vector3 destination = new Vector3(randomNum,transform.position.y,transform.position.z);
+            transform.position = Vector3.Lerp(startPosition.position,destination, t);
             
-            if(Mathf.Abs(transform.position.x - destination.x) < 1f)
-            {
+            // if (Vector3.Distance(transform.position,destination) < 0.01f)
+            // {
+            //     transform.position = destination;
+            //     canMove = false;
+            // }
+
+            if(Mathf.Abs(transform.position.x - destination.x) < 0.01f)
                 canMove = false;
-                doubleHit = false;
-            }
         }
     }
 
@@ -106,4 +112,19 @@ public class Thief : MonoBehaviour
         anim.SetBool("isHit",false);
     }
 
+    void IncreaseMoveSpeedWhenHitting()
+    {
+        m_moveSpeed += 0.3f;
+    }
+
+    void DecreaseMoveSpeed()
+    {
+        StartCoroutine(DecreaseMoveSpeedRoutine());
+    }
+
+    IEnumerator DecreaseMoveSpeedRoutine()
+    {
+        yield return new WaitForSeconds(2f);
+        m_moveSpeed -= 0.3f;
+    }
 }

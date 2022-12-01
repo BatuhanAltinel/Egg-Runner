@@ -5,10 +5,11 @@ using UnityEngine;
 public class PlayerController : MonoBehaviour
 {
     public float moveSpeed;
+    public float rbMoveSpeed = 250f;
     public float xSpeed;
 
     private Animator anim;
-
+    private Rigidbody rb;
     public GameObject wood;
 
     Touch m_Touch;
@@ -17,7 +18,7 @@ public class PlayerController : MonoBehaviour
     private void Awake()
     {
         anim = GetComponent<Animator>();
-        
+        rb = GetComponent<Rigidbody>();
     }
     // Update is called once per frame
     void Update()
@@ -47,6 +48,7 @@ public class PlayerController : MonoBehaviour
     void MoveForward()
     {
         transform.Translate(Vector3.forward * moveSpeed);
+        // rb.velocity = new Vector3(0,0,rbMoveSpeed*Time.deltaTime);
         anim.SetInteger("moveOn", 1);
     }
 

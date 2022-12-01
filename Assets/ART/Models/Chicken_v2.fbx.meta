@@ -17,7 +17,7 @@ ModelImporter:
       type: UnityEngine:Material
       assembly: UnityEngine.CoreModule
       name: whitechick
-    second: {fileID: 2100000, guid: ddf936b921f1ab34bb916fc3e69a8c2d, type: 2}
+    second: {fileID: 2100000, guid: 7c07338e6ec95e14a96d399c5824ff61, type: 2}
   materials:
     materialImportMode: 2
     materialName: 0

@@ -5,21 +5,27 @@ using UnityEngine;
 public class EggStack : MonoBehaviour
 {
 
-    public Transform[] stackPoints = new Transform[15];
+    [SerializeField] float timeToMove = 1f;
+    public Transform firstEggPosition;
+    public Transform currentEggPosition;
 
-    // List<GameObject> _eggList = new List<GameObject>();
-
-    private int _eggListIndexCounter = 0;
-
+    [SerializeField] GameObject eggParent;
+    void Start()
+    {
+        
+    }
     private void OnTriggerEnter(Collider other)
     {
       
-        if (other.CompareTag("Egg"))
+        if (other.gameObject.CompareTag("Egg"))
         {
-            // _eggList.Add(other.gameObject);
-
-            other.gameObject.GetComponent<Eggs>().Move(stackPoints[_eggListIndexCounter], 1f, true);
-            _eggListIndexCounter++;
+            
+            other.gameObject.GetComponent<Eggs>().Move(firstEggPosition, timeToMove, true);
+            other.gameObject.GetComponent<Eggs>().Move(currentEggPosition,timeToMove,true);
+            other.gameObject.transform.parent = eggParent.transform;
+            
         }
     }
+
+  
 }
